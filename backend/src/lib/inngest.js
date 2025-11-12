@@ -5,6 +5,7 @@ import User from "../models/User.js";
 export const inngest = new Inngest({
   id: "intervue",
   signingKey: process.env.INNGEST_SIGNING_KEY,
+  //signingKey added for enhanced security
 });
 
 const syncUser = inngest.createFunction(

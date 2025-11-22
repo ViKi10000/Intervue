@@ -8,7 +8,7 @@ export const inngest = new Inngest({
   //signingKey added for enhanced security
 });
 
-const syncUser = inngest.createFunction(
+export const syncUser = inngest.createFunction(
   { id: "Sync User", event: "clerk/user.created" },
   async ({ event }) => {
     await connectDB();
@@ -27,7 +27,7 @@ const syncUser = inngest.createFunction(
   }
 );
 
-const deleteUserFromDB = inngest.createFunction(
+export const deleteUserFromDB = inngest.createFunction(
   { id: "deleteUserFromDB ", event: "clerk/user.deleted" },
   async ({ event }) => {
     await connectDB();

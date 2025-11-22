@@ -9,7 +9,11 @@ export const inngest = new Inngest({
 });
 
 export const syncUser = inngest.createFunction(
-  { id: "Sync User", event: "clerk/user.created" },
+  {
+    id: "sync-user",
+    name: "Sync User",
+  },
+  { event: "clerk/user.created" },
   async ({ event }) => {
     await connectDB();
 
@@ -28,7 +32,11 @@ export const syncUser = inngest.createFunction(
 );
 
 export const deleteUserFromDB = inngest.createFunction(
-  { id: "deleteUserFromDB ", event: "clerk/user.deleted" },
+  {
+    id: "delete-user-from-db",
+    name: "Delete User From DB",
+  },
+  { event: "clerk/user.deleted" },
   async ({ event }) => {
     await connectDB();
 

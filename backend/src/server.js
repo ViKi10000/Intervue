@@ -5,6 +5,8 @@ import { connectDB } from "./lib/db.js";
 import cors from "cors";
 import { serve } from "inngest/express";
 import { functions, inngest } from "./lib/inngest.js";
+import {clerkMiddleware} from "@clerk/express"
+import chatRoutes from "./routes/chatRoutes.js"
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use(
   })
 );
 
+app.use(clerkMiddleware()) // this adds auth field to req object: req.auth()
+
 app.use(
   "/api/inngest",
   serve({
@@ -27,13 +31,14 @@ app.use(
   })
 );
 
+app.use("/api/chat",chatRoutes)
+
 app.get("/health", (req, res) => {
+
   res.send("api is up and running.");
 });
 
-app.get("/books", (req, res) => {
-  res.send("this is the books endpoint");
-});
+
 
 //make our app ready for deployment
 if (ENV.NODE_ENV === "production") {
